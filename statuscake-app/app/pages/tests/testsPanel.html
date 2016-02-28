@@ -1,0 +1,38 @@
+<ion-navbar *navbar>
+  <ion-title>All tests</ion-title>
+  <ion-buttons end>
+    <button (click)="refreshTests()">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="tests-page">
+
+  <!--<ion-refresher (refresh)="refreshTests($event)"></ion-refresher>-->
+
+  <!--
+    order the list
+      alphabet but down ones on top
+    make it searchable
+    make text smaller
+
+
+  -->
+
+
+  <ion-list>
+    <ion-item *ngFor="#test of tests | async"  [ngClass]="{ 'text-muted': test.Paused}">
+      <ion-thumbnail item-left>
+        <ion-icon *ngIf="test.Status == 'Up' && !test.Paused" name="checkmark"></ion-icon>
+        <ion-icon *ngIf="test.Status == 'Down'" name="close"></ion-icon>
+        <ion-icon *ngIf="test.Status != 'Down' && test.Paused" name="pause"></ion-icon>
+      </ion-thumbnail>
+      <h2>{{test.WebsiteName}}</h2>
+      <p>Uptime: <ion-badge item-right>{{test.Uptime}}%</ion-badge></p>
+
+      <button clear item-right >Details</button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

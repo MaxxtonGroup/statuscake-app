@@ -1,0 +1,30 @@
+
+<ion-navbar *navbar>
+  <ion-title>
+    Statuscake Settings
+  </ion-title>
+  <ion-buttons end>
+    <button (click)="saveSettings()">Done</button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="settings-page" padding>
+
+  <h2>Statuscake settings</h2>
+
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="scUsername"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>API Key</ion-label>
+      <ion-input type="text" [(ngModel)]="scApiKey"></ion-input>
+    </ion-item>
+    <a href="https://www.statuscake.com/App/APIKey.php" target="_blank">Get the api key here.</a>
+  </ion-list>
+
+  <h2>Other settings</h2>
+  <p>..</p>
+</ion-content>
