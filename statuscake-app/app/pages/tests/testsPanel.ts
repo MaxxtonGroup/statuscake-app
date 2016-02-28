@@ -8,6 +8,7 @@ import {NavController} from "ionic-framework/ionic";
 import {NgClass} from "angular2/common";
 import {ConfigService} from "../../services/config-service";
 import {SettingsPanel} from "../settings/settingsPanel";
+import {DetailsPanel} from "../testdetails/detailsPanel";
 
 
 /**
@@ -37,13 +38,12 @@ export class TestsPanel implements OnInit {
   refreshTests($event?):void {
     this.tests = this.statuscakeService.getTests();
 
-
     if($event != null)
       $event.complete();
   }
 
   goToDetailPage(testId:number) {
-    //this.nav.push(TestDetailPage);
+    this.statuscakeService.getTest(testId).subscribe((response) => { this.nav.push(DetailsPanel, { test: response }); });
   }
 
 }
