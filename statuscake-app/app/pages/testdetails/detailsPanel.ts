@@ -17,9 +17,11 @@ import {Observable} from "rxjs/Observable";
 })
 export class DetailsPanel implements OnInit {
   private test:TestDetail = null;
+  private testFields:Array<any>;
 
   constructor(private statuscakeService:StatuscakeService, private nav:NavController, private navParams: NavParams) {
     this.test = this.navParams.get('test');
+    this.testFields = Object.keys(this.test);
   }
 
   ngOnInit():void {

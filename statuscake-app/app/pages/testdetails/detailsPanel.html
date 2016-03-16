@@ -6,9 +6,11 @@
 
 <ion-content class="details-page" padding>
 
-  <h2>Details {{test.WebsiteName}}</h2>
-  <pre>{{test | json}}</pre>
-
-
+  <ion-list>
+    <ion-item *ngFor="#field of testFields">
+      {{field}}
+      <ion-note item-right>{{test[field]}}</ion-note>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

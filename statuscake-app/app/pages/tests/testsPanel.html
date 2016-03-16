@@ -28,7 +28,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-searchbar *ngIf="tests | async | sortTest:filterQuery:filterStatus" [(ngModel)]="filterQuery"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="filterQuery"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="#test of tests | async | sortTest:filterQuery:filterStatus"  [ngClass]="{ 'text-muted': test.Paused}">
       <ion-thumbnail item-left>
@@ -43,6 +43,10 @@
     </ion-item>
   </ion-list>
 
-  <p *ngIf="tests | async">There are no tests matching your filter.</p>
+  <ion-card *ngIf="tests | async">
+    <ion-card-content>
+      There are no tests matching your filter.
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
