@@ -12,7 +12,6 @@
     "inlineSources": false
   },
   "files": [
-    "app/app.ts",
     "app/**/*.ts"
   ],
   "exclude": [

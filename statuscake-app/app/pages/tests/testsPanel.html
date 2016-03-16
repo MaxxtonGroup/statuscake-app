@@ -5,24 +5,32 @@
       <ion-icon name="refresh"></ion-icon>
     </button>
   </ion-buttons>
+
+
 </ion-navbar>
+
+
 
 <ion-content class="tests-page">
 
-  <!--<ion-refresher (refresh)="refreshTests($event)"></ion-refresher>-->
+  <ion-segment [(ngModel)]="filterStatus">
+    <ion-segment-button value="all">
+      All
+    </ion-segment-button>
+    <ion-segment-button value="up">
+      Up
+    </ion-segment-button>
+    <ion-segment-button value="down">
+      Down
+    </ion-segment-button>
+    <ion-segment-button value="paused">
+      Paused
+    </ion-segment-button>
+  </ion-segment>
 
-  <!--
-    order the list
-      alphabet but down ones on top
-    make it searchable
-    make text smaller
-
-
-  -->
-
-
+  <ion-searchbar *ngIf="tests | async | sortTest:filterQuery:filterStatus" [(ngModel)]="filterQuery"></ion-searchbar>
   <ion-list>
-    <ion-item *ngFor="#test of tests | async"  [ngClass]="{ 'text-muted': test.Paused}">
+    <ion-item *ngFor="#test of tests | async | sortTest:filterQuery:filterStatus"  [ngClass]="{ 'text-muted': test.Paused}">
       <ion-thumbnail item-left>
         <ion-icon *ngIf="test.Status == 'Up' && !test.Paused" name="checkmark"></ion-icon>
         <ion-icon *ngIf="test.Status == 'Down'" name="close"></ion-icon>
@@ -34,5 +42,7 @@
       <button clear item-right (click)="goToDetailPage(test.TestID)">Details</button>
     </ion-item>
   </ion-list>
+
+  <p *ngIf="tests | async">There are no tests matching your filter.</p>
 
 </ion-content>

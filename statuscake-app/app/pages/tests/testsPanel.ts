@@ -9,6 +9,8 @@ import {NgClass} from "angular2/common";
 import {ConfigService} from "../../services/config-service";
 import {SettingsPanel} from "../settings/settingsPanel";
 import {DetailsPanel} from "../testdetails/detailsPanel";
+import {SortTestPipe} from "../../pipes/sort";
+
 
 
 /**
@@ -17,10 +19,14 @@ import {DetailsPanel} from "../testdetails/detailsPanel";
  */
 @Page({
   templateUrl: 'build/pages/tests/testsPanel.html',
-  directives: [NgClass]
+  directives: [NgClass],
+  pipes: [SortTestPipe]
 })
 export class TestsPanel implements OnInit {
   private tests:Observable<Array<Test>>;
+  private allTests:Observable<Array<Test>>;
+  private filterQuery = '';
+  private filterStatus = 'all';
 
   constructor(private statuscakeService:StatuscakeService, private nav: NavController, private configService:ConfigService) {
   }
@@ -35,15 +41,15 @@ export class TestsPanel implements OnInit {
     });
   }
 
-  refreshTests($event?):void {
+  public refreshTests($event?):void {
     this.tests = this.statuscakeService.getTests();
+    this.allTests = this.tests;
 
     if($event != null)
       $event.complete();
   }
 
-  goToDetailPage(testId:number) {
+  public goToDetailPage(testId:number) {
     this.statuscakeService.getTest(testId).subscribe((response) => { this.nav.push(DetailsPanel, { test: response }); });
   }
-
 }

@@ -1,6 +1,5 @@
 import {Page} from 'ionic-framework/ionic';
 
-import {AlertsPanel} from '../alerts/alertsPanel';
 import {SettingsPanel} from '../settings/settingsPanel';
 import {Type} from 'angular2/core';
 import {TestsPanel} from "../tests/testsPanel";
@@ -16,8 +15,7 @@ export class TabsPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
   tab1Root: Type = TestsPanel;
-  tab2Root: Type = AlertsPanel;
-  tab3Root: Type = SettingsPanel;
+  tab2Root: Type = SettingsPanel;
 
   constructor() {
 

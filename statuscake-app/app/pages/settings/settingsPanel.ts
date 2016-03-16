@@ -8,7 +8,7 @@ import {TestsPanel} from "../tests/testsPanel";
  * @author R. Sonke
  */
 @Page({
-  templateUrl: 'build/pages/settings/detailsPanel.html'
+  templateUrl: 'build/pages/settings/settingsPanel.html'
 })
 export class SettingsPanel {
   private scUsername;
