@@ -7,6 +7,7 @@ import {StatuscakeService} from "../../services/statuscake-service";
 import {OnInit} from "angular2/core";
 import {NavParams} from "ionic-framework/ionic";
 import {Observable} from "rxjs/Observable";
+import {Platform} from 'ionic-framework/ionic';
 
 /**
  * Panel that shows all details for one test.
@@ -26,5 +27,9 @@ export class DetailsPanel implements OnInit {
 
   ngOnInit():void {
 
+  }
+
+  public openWebsite(url) {
+    cordova.InAppBrowser.open(url, "_system", "location=true");
   }
 }

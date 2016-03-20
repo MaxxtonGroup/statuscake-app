@@ -10,6 +10,8 @@ import {ConfigService} from "../../services/config-service";
 import {SettingsPanel} from "../settings/settingsPanel";
 import {DetailsPanel} from "../testdetails/detailsPanel";
 import {SortTestPipe} from "../../pipes/sort";
+import {Platform} from 'ionic-framework/ionic';
+
 
 
 
@@ -28,7 +30,8 @@ export class TestsPanel implements OnInit {
   private filterQuery = '';
   private filterStatus = 'all';
 
-  constructor(private statuscakeService:StatuscakeService, private nav: NavController, private configService:ConfigService) {
+  constructor(private statuscakeService:StatuscakeService, private nav: NavController, private configService:ConfigService, private platform: Platform) {
+
   }
 
   ngOnInit():any {

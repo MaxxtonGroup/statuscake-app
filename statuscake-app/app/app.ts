@@ -6,6 +6,10 @@ import {ConfigService} from './services/config-service'
 
 /**
  * Simple app that shows Statuscake tests
+ *
+ * TODO:
+ * loading spinners to show network activity
+ *
  * @author R. Sonke
  */
 @App({
@@ -21,7 +25,7 @@ import {ConfigService} from './services/config-service'
   providers: [StatuscakeService, ConfigService]
 })
 export class MyApp {
-  rootPage: Type = TabsPage;
+  rootPage:Type = TabsPage;
 
   constructor(platform: Platform) {
     platform.ready().then(() => {

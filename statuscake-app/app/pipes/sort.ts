@@ -1,18 +1,19 @@
-import {Pipe} from "angular2/core";
+import {Pipe, PipeTransform} from "angular2/core";
 import {Test} from "../domain/test";
-import {PipeTransform} from "angular2/core";
 
 /**
  * Simple pipe that orders the tests by status and name.
  * The broken tests are shown at the top.
+ *
+ * @author R. Sonke
  */
 @Pipe({
   name: "sortTest"
 })
 export class SortTestPipe implements PipeTransform {
 
-  public transform(array: Array<Test>, args: Array<string>): Array<Test> {
-    if(!array) return array;
+  public transform(array:Array<Test>, args:Array<string>):Array<Test> {
+    if (!array) return array;
 
     array = this.filterResults(array, args);
     array = this.sortResults(array);
@@ -23,13 +24,14 @@ export class SortTestPipe implements PipeTransform {
   private filterResults(array:Array<Test>, args:Array<string>):Array<Test> {
     if (args && args.length > 0) {
 
-      let filterQuery = args[0];
+      let filterQuery = args[0].toLowerCase();
       let filterStatus = args[1];
 
       array = array.filter((item:Test) => {
         if (filterStatus == "all" || filterStatus.toLowerCase() == item.Status.toLowerCase() || (filterStatus == "paused" && item.Paused)) {
-
-          if ((item.WebsiteName.indexOf(filterQuery) !== -1)) {
+          // check for a match on name or url
+          // in any way, case insensitive
+          if (item.WebsiteName.toLowerCase().indexOf(filterQuery) !== -1) {
             return true;
           }
           if (filterQuery.length == 0) {
@@ -43,15 +45,15 @@ export class SortTestPipe implements PipeTransform {
   }
 
   private sortResults(array:Array<Test>):Array<Test> {
-    array.sort((a: Test, b: Test) => {
-      if(a == null) return -1;
-      if(b == null) return 1;
+    array.sort((a:Test, b:Test) => {
+      if (a == null) return -1;
+      if (b == null) return 1;
 
-      if(a.Status == "Down" && b.Status == "Down") {
+      if (a.Status == "Down" && b.Status == "Down") {
         return a.WebsiteName.localeCompare(b.WebsiteName);
       }
-      if(a.Status == "Down") return -1;
-      if(b.Status == "Down") return 1;
+      if (a.Status == "Down") return -1;
+      if (b.Status == "Down") return 1;
 
       return a.WebsiteName.localeCompare(b.WebsiteName);
     });
