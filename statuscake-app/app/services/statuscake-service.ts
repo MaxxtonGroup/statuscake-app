@@ -31,6 +31,11 @@ export class StatuscakeService {
     this.requestOptions = new RequestOptions({headers: this.headers});
   }
 
+  /**
+   * Get all tests
+   *
+   * @returns {Observable<Array<Test>>}
+   */
   public getTests():Observable<Array<Test>> {
 
     let tests:Observable<Array<Test>> = this.http.get(`${this.SC_API_URL}/Tests`, this.requestOptions)
@@ -40,6 +45,11 @@ export class StatuscakeService {
     return tests;
   }
 
+  /**
+   * Get one specific test with all details
+   * @param testId
+   * @returns {Observable<TestDetail>}
+   */
   public getTest(testId:number):Observable<TestDetail> {
     let params = new URLSearchParams();
     params.set('TestID', testId.toString());
@@ -53,4 +63,16 @@ export class StatuscakeService {
     return test;
   }
 
+  /**
+   * Pause this test, to void push messages
+   * @param test
+   */
+  public togglePauseTest(test:Test) {
+    let setPaused:number = 1;
+    if(test.Paused)
+      setPaused = 0;
+
+    this.http.put(`${this.SC_API_URL}/Tests/Update`, `TestID=${test.TestID}&Paused=${setPaused}`, this.requestOptions)
+      .subscribe((response) => { console.log(response.json()); });
+  }
 }

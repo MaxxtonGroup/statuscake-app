@@ -31,20 +31,29 @@
   <ion-searchbar [(ngModel)]="filterQuery"></ion-searchbar>
   <ion-spinner name="crescent"></ion-spinner>
   <ion-list>
-    <ion-item *ngFor="#test of tests | async | sortTest:filterQuery:filterStatus"  [ngClass]="{ 'text-muted': test.Paused}">
-      <ion-thumbnail item-left>
-        <ion-icon *ngIf="test.Status == 'Up' && !test.Paused" name="checkmark"></ion-icon>
-        <ion-icon *ngIf="test.Status == 'Down'" name="close"></ion-icon>
-        <ion-icon *ngIf="test.Status != 'Down' && test.Paused" name="pause"></ion-icon>
-      </ion-thumbnail>
-      <h2>{{test.WebsiteName}}</h2>
-      <p>Uptime: <ion-badge item-right>{{test.Uptime}}%</ion-badge></p>
+    <ion-item-sliding *ngFor="#test of tests | async | sortTest:filterQuery:filterStatus" [ngClass]="{ 'text-muted': test.Paused}">
 
-      <button clear item-right (click)="goToDetailPage(test.TestID)">Details</button>
-    </ion-item>
+      <ion-item [ngClass]="{ 'text-muted': test.Paused}">
+        <ion-thumbnail item-left>
+          <ion-icon *ngIf="test.Status == 'Up' && !test.Paused" name="checkmark"></ion-icon>
+          <ion-icon *ngIf="test.Status == 'Down'" name="close"></ion-icon>
+          <ion-icon *ngIf="test.Status != 'Down' && test.Paused" name="pause"></ion-icon>
+        </ion-thumbnail>
+        <h2>{{test.WebsiteName}}</h2>
+        <p>Uptime: <ion-badge item-right>{{test.Uptime}}%</ion-badge></p>
+
+        <button clear item-right (click)="goToDetailPage(test.TestID)">Details</button>
+      </ion-item>
+      <ion-item-options>
+        <button primary (click)="togglePauseTest(test)">
+          <ion-icon *ngIf="!test.Paused" name="pause"></ion-icon>
+          <ion-icon *ngIf="test.Paused" name="play"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
-  <ion-card *ngIf="(tests | async)?.length == 0">
+  <ion-card *ngIf="(tests | async | sortTest:filterQuery:filterStatus)?.length == 0">
     <ion-card-content>
       There are no tests matching your filter.
     </ion-card-content>

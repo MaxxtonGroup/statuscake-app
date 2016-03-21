@@ -3,6 +3,8 @@ import {TabsPage} from './pages/tabs/tabsPanel';
 import {Type} from "angular2/core";
 import {StatuscakeService} from './services/statuscake-service'
 import {ConfigService} from './services/config-service'
+import {LoadingModal} from "./components/loading/loadingModal";
+import {IonicApp, Config} from "ionic-angular/index";
 
 /**
  * Simple app that shows Statuscake tests
@@ -13,7 +15,7 @@ import {ConfigService} from './services/config-service'
  * @author R. Sonke
  */
 @App({
-  template: '<ion-nav [root]="rootPage"></ion-nav>',
+  template: '<ion-nav [root]="rootPage"></ion-nav><loading-modal id="loading"></loading-modal>',
   config: {
     iconMode: 'ios',
     modalEnter: 'modal-slide-in',
@@ -22,6 +24,7 @@ import {ConfigService} from './services/config-service'
     pageTransition: 'ios',
     favoriteColor: 'orange'
   },
+  directives: [LoadingModal],
   providers: [StatuscakeService, ConfigService]
 })
 export class MyApp {
