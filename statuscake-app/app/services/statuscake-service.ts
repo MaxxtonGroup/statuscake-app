@@ -1,15 +1,14 @@
 import {Injectable} from "angular2/core";
-import {Inject} from "angular2/core";
 import {Observable} from 'rxjs/Rx';
 import {Test} from "../domain/test";
-import {Http} from "angular2/http";
+import {Http, URLSearchParams} from "angular2/http";
 import {Response} from "angular2/http";
+
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
-import {Headers} from "angular2/http";
+import 'rxjs/add/operator/share';
+import {Headers,RequestOptions,Headers} from "angular2/http";
 import {TestDetail} from "../domain/testdetail";
-import {RequestOptions} from "angular2/http";
-import {URLSearchParams} from "angular2/http";
 import {ConfigService} from "./config-service";
 
 
@@ -41,7 +40,8 @@ export class StatuscakeService {
     let tests:Observable<Array<Test>> = this.http.get(`${this.SC_API_URL}/Tests`, this.requestOptions)
       .map((response:Response) => {
         return response.json()
-      });
+      }).share();
+
     return tests;
   }
 
@@ -58,7 +58,7 @@ export class StatuscakeService {
     let test:Observable<TestDetail> = this.http.get(`${this.SC_API_URL}/Tests/Details`, requestOptions)
       .map((response:Response) => {
         return response.json()
-      });
+      }).share();
 
     return test;
   }
