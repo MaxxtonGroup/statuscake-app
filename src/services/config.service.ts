@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 export class ConfigService {
   public static STATUSCAKE_APIKEY:string = "sc_apikey";
   public static STATUSCAKE_USERNAME:string = "sc_username";
+  public static STATUSCAKE_TAGS:string = "sc_tags";
 
   constructor(private storage:Storage) { }
 
@@ -31,4 +32,11 @@ export class ConfigService {
     this.storage.set(ConfigService.STATUSCAKE_USERNAME, username);
   }
 
+  public getStatusCakeTags():Promise<string> {
+    return this.storage.get(ConfigService.STATUSCAKE_TAGS);
+  }
+
+  public setStatusCakeTags(tags:string) {
+    this.storage.set(ConfigService.STATUSCAKE_TAGS, tags);
+  }
 }

@@ -1,32 +1,49 @@
-
-
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { TestDetail } from "../../domain/testdetail";
-import { NavController, NavParams } from "ionic-angular";
-import { StatuscakeService } from "../../services/statuscake.service";
+import { NavParams } from "ionic-angular";
 import { InAppBrowser } from "ionic-native";
+
 /**
  * Panel that shows all details for one test.
  * @author R. Sonke
  */
 @Component({
-  templateUrl: 'detail.component.html'
+  //templateUrl: 'detail.component.html'
+  template: `
+    <ion-header>
+      <ion-navbar>
+        <ion-title>
+          {{test.WebsiteName}}
+        </ion-title>
+      </ion-navbar>
+    </ion-header>
+    
+    <ion-content class="details-page" padding>
+    
+      <button ion-button (click)="openWebsite(test.URI)"><ion-icon name="link"></ion-icon> Open website</button>
+    
+      <ion-list>
+        <span *ngFor="let field of testFields">
+        <ion-item *ngIf="field != 'URI'">
+          <ion-label>{{field}}</ion-label>
+          <ion-note item-right>{{test[field]}}</ion-note>
+        </ion-item>
+        </span>
+      </ion-list>
+    
+    </ion-content>
+  `
 })
-export class DetailsPanel implements OnInit {
+export class DetailPanelComponent {
   private test:TestDetail = null;
   private testFields:Array<any>;
 
-  constructor(private statuscakeService:StatuscakeService, private nav:NavController, private navParams: NavParams) {
+  constructor(private navParams: NavParams) {
     this.test = this.navParams.get('test');
     this.testFields = Object.keys(this.test);
   }
 
-  ngOnInit():void {
-
-  }
-
   public openWebsite(url) {
-    // cordova.InAppBrowser.open(url, "_system", "location=true");
     let browser = new InAppBrowser(url, '_system');
     browser.show();
   }

@@ -2,19 +2,21 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
-import { SettingsPanel } from "../pages/settings/settings.component";
+import { SettingsPanelComponent } from "../pages/settings/settings.component";
 import { TestsPanelComponent } from "../pages/tests/tests.component";
-import { DetailsPanel } from "../pages/detail/detail.component";
+import { DetailPanelComponent } from "../pages/detail/detail.component";
 import { SortTestPipe } from "../pipes/sort-filter.pipe";
 import { ConfigService } from "../services/config.service";
 import { StatuscakeService } from "../services/statuscake.service";
+import { BulkActionComponent } from "../pages/bulk/bulk.component";
 
 @NgModule({
   declarations: [
     MyApp,
-    SettingsPanel,
+    SettingsPanelComponent,
     TestsPanelComponent,
-    DetailsPanel,
+    DetailPanelComponent,
+    BulkActionComponent,
     SortTestPipe
   ],
   imports: [
@@ -23,9 +25,10 @@ import { StatuscakeService } from "../services/statuscake.service";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    SettingsPanel,
+    SettingsPanelComponent,
     TestsPanelComponent,
-    DetailsPanel
+    BulkActionComponent,
+    DetailPanelComponent
   ],
   providers: [
     ConfigService,

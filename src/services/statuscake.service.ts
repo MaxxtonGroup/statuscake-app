@@ -18,15 +18,13 @@ import {ConfigService} from "./config.service";
 @Injectable()
 export class StatuscakeService {
 
-  private SC_API_URL:string = "https://www.statuscake.com/API";
+  private SC_API_URL:string = "https://app.statuscake.com/API";
   private headers:Headers;
-  private requestOptions:RequestOptions;
 
   constructor(private http:Http, private configService:ConfigService) {
     this.headers = new Headers();
     this.configService.getStatusCakeApiKey().then((key) => { this.headers.set('api', key); });
     this.configService.getStatusCakeUsername().then((user) => { this.headers.set('username', user); });
-    this.requestOptions = new RequestOptions({headers: this.headers});
   }
 
   /**
@@ -34,9 +32,13 @@ export class StatuscakeService {
    *
    * @returns {Observable<Array<Test>>}
    */
-  public getTests():Observable<Array<Test>> {
+  public getTests(tag?:string):Observable<Array<Test>> {
+    let params = new URLSearchParams();
+    if(tag)
+      params.set("tags", tag);
+    let requestOptions:RequestOptions = new RequestOptions({headers: this.headers, search: params});
 
-    let tests:Observable<Array<Test>> = this.http.get(`${this.SC_API_URL}/Tests`, this.requestOptions)
+    let tests:Observable<Array<Test>> = this.http.get(`${this.SC_API_URL}/Tests`, requestOptions)
       .map((response:Response) => {
         return response.json()
       }).share();
@@ -63,6 +65,35 @@ export class StatuscakeService {
   }
 
   /**
+   * Pause tests with a specific tag
+   *
+   * @param tag the name of the tag linked to tests
+   * @param pause set to false to resume tests
+   */
+  public pauseTestsByTag(tag:string, pause:boolean) {
+    let setPaused:number = 1;
+    if(!pause)
+      setPaused = 0;
+
+    // get all tests by tag
+    this.getTests(tag).subscribe((tests:Array<Test>) => { for (let test of tests) this.pauseTest(test, setPaused); });
+  }
+
+  /**
+   * Pause/resume all tests
+   *
+   * @param pause set to false to resume tests
+   */
+  public pauseTests(pause:boolean) {
+    let setPaused:number = 1;
+    if(!pause)
+      setPaused = 0;
+
+    // get all tests
+    this.getTests().subscribe((tests:Array<Test>) => { for (let test of tests) this.pauseTest(test, setPaused); });
+  }
+
+  /**
    * Pause this test, to void push messages
    * @param test
    */
@@ -71,7 +102,12 @@ export class StatuscakeService {
     if(test.Paused)
       setPaused = 0;
 
-    this.http.put(`${this.SC_API_URL}/Tests/Update`, `TestID=${test.TestID}&Paused=${setPaused}`, this.requestOptions)
+    this.pauseTest(test, setPaused);
+  }
+
+  private pauseTest(test:Test, paused:number):void {
+    let requestOptions:RequestOptions = new RequestOptions({headers: this.headers});
+    this.http.put(`${this.SC_API_URL}/Tests/Update`, `TestID=${test.TestID}&Paused=${paused}`, requestOptions)
       .subscribe((response) => { console.log(response.json()); });
   }
 }

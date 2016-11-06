@@ -2,11 +2,33 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { TestsPanelComponent } from "../pages/tests/tests.component";
-import { SettingsPanel } from "../pages/settings/settings.component";
+import { SettingsPanelComponent } from "../pages/settings/settings.component";
+import { BulkActionComponent } from "../pages/bulk/bulk.component";
 
 
 @Component({
-  templateUrl: 'app.component.html'
+  // templateUrl: 'app.component.html'
+  template: `
+    <ion-menu [content]="content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    
+      <ion-content>
+        <ion-list>
+          <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+            {{p.title}}
+          </button>
+        </ion-list>
+      </ion-content>
+    
+    </ion-menu>
+    
+    <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+    <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+  `
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -21,7 +43,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Tests', component: TestsPanelComponent },
-      { title: 'Settings', component: SettingsPanel }
+      { title: 'Bulk actions', component: BulkActionComponent },
+      { title: 'Settings', component: SettingsPanelComponent }
     ];
 
   }

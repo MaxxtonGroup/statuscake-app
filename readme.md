@@ -3,11 +3,13 @@ Simple Ionic2 app which shows Statuscake.com tests. Useful for easy lookup of po
 
 # Usage
 To run this app in the browser:
-  ionic serve
+* ionic serve
 
 To run on iOS:
-  ionic run ios
+* ionic build
+* ionic prepare ios
+* ionic run ios
 
 To run on Android:
-  ionic run android
+* ionic run android
 
