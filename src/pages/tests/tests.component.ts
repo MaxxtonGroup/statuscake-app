@@ -3,9 +3,9 @@ import { Observable } from "rxjs";
 import { StatuscakeService } from "../../services/statuscake.service";
 import { NavController, IonicApp, ItemSliding } from "ionic-angular";
 import { ConfigService } from "../../services/config.service";
-import { SettingsPanel } from "../settings/settingsPanel";
+import { SettingsPanel } from "../settings/settings.component";
 import { Test } from "../../domain/test";
-import { DetailsPanel } from "../testdetails/detailsPanel";
+import { DetailsPanel } from "../detail/detail.component";
 
 /**
  * Panel that shows a list of tests.

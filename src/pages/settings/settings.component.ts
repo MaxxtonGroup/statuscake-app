@@ -8,7 +8,7 @@ import { Component } from "@angular/core";
  * @author R. Sonke
  */
 @Component({
-  templateUrl: 'settingsPanel.html'
+  templateUrl: 'settings.component.html'
 })
 export class SettingsPanel {
   private scUsername;

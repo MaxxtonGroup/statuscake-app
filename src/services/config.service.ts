@@ -1,4 +1,3 @@
-//import { SqlStorage, Storage } from "ionic-framework/ionic";
 import { Injectable } from "@angular/core";
 import { Storage } from '@ionic/storage';
 
@@ -11,14 +10,10 @@ import { Storage } from '@ionic/storage';
  */
 @Injectable()
 export class ConfigService {
-
-  //public static STATUSCAKE_STORAGE:string = "sc";
   public static STATUSCAKE_APIKEY:string = "sc_apikey";
   public static STATUSCAKE_USERNAME:string = "sc_username";
 
-  constructor(private storage:Storage) {
-    //this.storage = new Storage({name: ConfigService.STATUSCAKE_STORAGE});
-  }
+  constructor(private storage:Storage) { }
 
   public getStatusCakeApiKey():Promise<string> {
     return this.storage.get(ConfigService.STATUSCAKE_APIKEY);

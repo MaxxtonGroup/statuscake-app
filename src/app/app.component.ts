@@ -2,8 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { TestsPanelComponent } from "../pages/tests/tests.component";
-import { DetailsPanel } from "../pages/testdetails/detailsPanel";
-import { SettingsPanel } from "../pages/settings/settingsPanel";
+import { SettingsPanel } from "../pages/settings/settings.component";
 
 
 @Component({
@@ -22,7 +21,6 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Tests', component: TestsPanelComponent },
-      { title: 'Test details', component: DetailsPanel },
       { title: 'Settings', component: SettingsPanel }
     ];
 

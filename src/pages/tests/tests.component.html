@@ -34,7 +34,7 @@
         <h2>{{test.WebsiteName}}</h2>
         <p>Uptime: <ion-badge item-right>{{test.Uptime}}%</ion-badge></p>
 
-        <button clear item-right (click)="goToDetailPage(test.TestID)">Details</button>
+        <button clear ion-button small item-right (click)="goToDetailPage(test.TestID)">Details</button>
       </ion-item>
       <ion-item-options>
         <button ion-button expandable (click)="togglePauseTest(test, slidingItem)">

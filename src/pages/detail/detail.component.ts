@@ -10,7 +10,7 @@ import { InAppBrowser } from "ionic-native";
  * @author R. Sonke
  */
 @Component({
-  templateUrl: 'detailsPanel.html'
+  templateUrl: 'detail.component.html'
 })
 export class DetailsPanel implements OnInit {
   private test:TestDetail = null;
