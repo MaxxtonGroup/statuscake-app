@@ -1,5 +1,5 @@
 /**
- * Class representing the test details returned by /TestsPanel/Details?TestID=123
+ * Class representing the test details returned by /TestsPanelComponent/Details?TestID=123
  * @author R. Sonke
  *
  * Example json:

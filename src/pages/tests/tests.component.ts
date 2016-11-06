@@ -1,34 +1,28 @@
-import {Page, IonicApp, NavController} from "ionic-framework/ionic";
-import {StatuscakeService} from "../../services/statuscake-service";
-import {Test} from "../../domain/test";
-import {Observable} from "rxjs/Observable";
-import {OnInit} from "angular2/core";
-import {NgClass} from "angular2/common";
-import {ConfigService} from "../../services/config-service";
-import {SettingsPanel} from "../settings/settingsPanel";
-import {DetailsPanel} from "../testdetails/detailsPanel";
-import {SortTestPipe} from "../../pipes/sort";
-import {LoadingModal} from "../../components/loading/loadingModal";
-import {Response} from "angular2/http";
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { StatuscakeService } from "../../services/statuscake.service";
+import { NavController, IonicApp, ItemSliding } from "ionic-angular";
+import { ConfigService } from "../../services/config.service";
+import { SettingsPanel } from "../settings/settingsPanel";
+import { Test } from "../../domain/test";
+import { DetailsPanel } from "../testdetails/detailsPanel";
 
 /**
  * Panel that shows a list of tests.
  * @author R. Sonke
  */
-@Page({
-  templateUrl: 'build/pages/tests/testsPanel.html',
-  directives: [NgClass],
-  pipes: [SortTestPipe]
+@Component({
+  selector: 'tests-panel',
+  templateUrl: 'tests.component.html'
 })
-export class TestsPanel implements OnInit {
+export class TestsPanelComponent implements OnInit {
   private tests:Observable<Array<Test>>;
   private allTests:Observable<Array<Test>>;
   private filterQuery:string = '';
   private filterStatus:string = 'all';
-  private loading:LoadingModal;
 
   constructor(private statuscakeService:StatuscakeService, private nav:NavController, private configService:ConfigService, private app:IonicApp) {
-    this.loading = app.getComponent('loading');
+
   }
 
   /**
@@ -50,16 +44,12 @@ export class TestsPanel implements OnInit {
    *
    * @param $event
    */
-  public refreshTests($event?):void {
-    this.loading.show();
+  public refreshTests(refresher?:any):void {
     this.tests = this.statuscakeService.getTests();
     this.allTests = this.tests;
-    this.tests.subscribe((response:Response) => {
-      this.loading.hide();
-    });
 
-    if ($event != null) {
-      $event.complete();
+    if (refresher != null) {
+      this.tests.subscribe( () => refresher.complete() );
     }
   }
 
@@ -68,16 +58,15 @@ export class TestsPanel implements OnInit {
    * @param testId
    */
   public goToDetailPage(testId:number):void {
-    this.loading.show();
     this.statuscakeService.getTest(testId).subscribe((response) => {
       this.nav.push(DetailsPanel, {test: response});
-      this.loading.hide();
     });
   }
 
-  public togglePauseTest(test:Test):void {
+  public togglePauseTest(test:Test, slidingItem:ItemSliding):void {
     // pause or unpause tests
     this.statuscakeService.togglePauseTest(test);
     test.Paused = !test.Paused;
+    slidingItem.close();
   }
 }

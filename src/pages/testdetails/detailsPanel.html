@@ -1,15 +1,17 @@
-<ion-navbar *navbar>
-  <ion-title>
-    {{test.WebsiteName}}
-  </ion-title>
-</ion-navbar>
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{test.WebsiteName}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="details-page" padding>
 
   <button (click)="openWebsite(test.URI)"><ion-icon name="link"></ion-icon> Open website</button>
 
   <ion-list>
-    <span *ngFor="#field of testFields">
+    <span *ngFor="let field of testFields">
     <ion-item *ngIf="field != 'URI'">
       <ion-label>{{field}}</ion-label>
       <ion-note item-right>{{test[field]}}</ion-note>

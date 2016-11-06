@@ -1,15 +1,14 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {Observable} from 'rxjs/Rx';
 import {Test} from "../domain/test";
-import {Http, URLSearchParams} from "angular2/http";
-import {Response} from "angular2/http";
-
+import {Http, URLSearchParams} from "@angular/http";
+import {Response} from "@angular/http";
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/share';
-import {Headers,RequestOptions,Headers} from "angular2/http";
+import {Headers,RequestOptions} from "@angular/http";
 import {TestDetail} from "../domain/testdetail";
-import {ConfigService} from "./config-service";
+import {ConfigService} from "./config.service";
 
 
 /**

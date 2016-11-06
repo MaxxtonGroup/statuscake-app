@@ -1,37 +1,29 @@
-<ion-navbar *navbar>
-  <ion-title>All tests</ion-title>
-  <ion-buttons end>
-    <button (click)="refreshTests()">
-      <ion-icon name="refresh"></ion-icon>
-    </button>
-  </ion-buttons>
-
-
-</ion-navbar>
-
-
+<ion-header>
+  <ion-navbar>
+    <ion-title>All tests</ion-title>
+    <ion-buttons>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="tests-page">
 
   <ion-segment [(ngModel)]="filterStatus">
-    <ion-segment-button value="all">
-      All
-    </ion-segment-button>
-    <ion-segment-button value="up">
-      Up
-    </ion-segment-button>
-    <ion-segment-button value="down">
-      Down
-    </ion-segment-button>
-    <ion-segment-button value="paused">
-      Paused
-    </ion-segment-button>
+    <ion-segment-button value="all">All</ion-segment-button>
+    <ion-segment-button value="up">Up</ion-segment-button>
+    <ion-segment-button value="down">Down</ion-segment-button>
+    <ion-segment-button value="paused">Paused</ion-segment-button>
   </ion-segment>
 
   <ion-searchbar [(ngModel)]="filterQuery"></ion-searchbar>
-  <ion-spinner name="crescent"></ion-spinner>
   <ion-list>
-    <ion-item-sliding *ngFor="#test of tests | async | sortTest:filterQuery:filterStatus" [ngClass]="{ 'text-muted': test.Paused}">
+    <ion-refresher #$event (ionRefresh)="refreshTests($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-item-sliding *ngFor="let test of tests | async | sortTest:filterQuery:filterStatus" [ngClass]="{ 'text-muted': test.Paused}" #slidingItem>
 
       <ion-item [ngClass]="{ 'text-muted': test.Paused}">
         <ion-thumbnail item-left>
@@ -45,7 +37,7 @@
         <button clear item-right (click)="goToDetailPage(test.TestID)">Details</button>
       </ion-item>
       <ion-item-options>
-        <button primary (click)="togglePauseTest(test)">
+        <button ion-button expandable (click)="togglePauseTest(test, slidingItem)">
           <ion-icon *ngIf="!test.Paused" name="pause"></ion-icon>
           <ion-icon *ngIf="test.Paused" name="play"></ion-icon>
         </button>

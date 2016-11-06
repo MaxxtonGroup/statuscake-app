@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
-import { SettingsPanel } from "src/app/pages/settings/settingsPanel";
-import { TestsPanel } from "src/app/pages/tests/testsPanel";
-import { DetailsPanel } from "src/app/pages/testdetails/detailsPanel";
+import { SettingsPanel } from "../pages/settings/settingsPanel";
+import { TestsPanelComponent } from "../pages/tests/tests.component";
+import { DetailsPanel } from "../pages/testdetails/detailsPanel";
+import { SortTestPipe } from "../pipes/sort-filter.pipe";
+import { ConfigService } from "../services/config.service";
+import { StatuscakeService } from "../services/statuscake.service";
 
 @NgModule({
   declarations: [
     MyApp,
     SettingsPanel,
-    TestsPanel,
-    DetailsPanel
+    TestsPanelComponent,
+    DetailsPanel,
+    SortTestPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -19,9 +24,13 @@ import { DetailsPanel } from "src/app/pages/testdetails/detailsPanel";
   entryComponents: [
     MyApp,
     SettingsPanel,
-    TestsPanel,
+    TestsPanelComponent,
     DetailsPanel
   ],
-  providers: []
+  providers: [
+    ConfigService,
+    StatuscakeService,
+    Storage
+  ]
 })
 export class AppModule {}

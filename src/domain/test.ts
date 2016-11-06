@@ -1,5 +1,5 @@
 /**
- * Class representing the tests returned by /TestsPanel
+ * Class representing the tests returned by /TestsPanelComponent
  * @author R. Sonke
  *
  * Example json:

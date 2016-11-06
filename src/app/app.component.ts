@@ -1,18 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { TestsPanel } from "src/app/pages/tests/testsPanel";
-import { DetailsPanel } from "src/app/pages/testdetails/detailsPanel";
-import { SettingsPanel } from "src/app/pages/settings/settingsPanel";
+import { TestsPanelComponent } from "../pages/tests/tests.component";
+import { DetailsPanel } from "../pages/testdetails/detailsPanel";
+import { SettingsPanel } from "../pages/settings/settingsPanel";
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.component.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = TestsPanel;
+  rootPage: any = TestsPanelComponent;
 
   pages: Array<{title: string, component: any}>;
 
@@ -21,7 +21,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Tests', component: TestsPanel },
+      { title: 'Tests', component: TestsPanelComponent },
       { title: 'Test details', component: DetailsPanel },
       { title: 'Settings', component: SettingsPanel }
     ];
