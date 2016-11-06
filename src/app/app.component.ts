@@ -13,6 +13,9 @@ import { BulkActionComponent } from "../pages/bulk/bulk.component";
       <ion-header>
         <ion-toolbar>
           <ion-title>Menu</ion-title>
+          <ion-buttons right>
+            <img width="50px" src="https://newyse-res.cloudinary.com/image/upload/maxxton2/logo.png" />
+          </ion-buttons>
         </ion-toolbar>
       </ion-header>
     

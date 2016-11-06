@@ -11,17 +11,7 @@ import { ConfigService } from "../../services/config.service";
   // templateUrl: 'bulk.component.html'
   template: `
     <ion-header>
-      <ion-navbar>
-        <ion-title>
-          <img width="50px" src="https://newyse-res.cloudinary.com/image/upload/maxxton2/logo.png" />
-          Bulk actions
-        </ion-title>
-        <ion-buttons>
-          <button ion-button menuToggle icon-only>
-            <ion-icon name='menu'></ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-navbar>
+      <status-header title="Bulk actions"></status-header>
     </ion-header>
     
     <ion-content class="bulk-action-page" padding>

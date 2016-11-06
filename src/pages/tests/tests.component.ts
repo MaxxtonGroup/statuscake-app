@@ -16,21 +16,7 @@ import { DetailPanelComponent } from "../detail/detail.component";
   //templateUrl: 'tests.component.html'
   template: `
     <ion-header>
-      <ion-navbar>
-        <ion-title>
-          All tests
-        </ion-title>
-        <ion-buttons right>
-          <img width="50px" src="https://newyse-res.cloudinary.com/image/upload/maxxton2/logo.png" />
-        </ion-buttons>
-        
-        <ion-buttons left>
-            
-          <button ion-button menuToggle icon-only>
-            <ion-icon name='menu'></ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-navbar>
+      <status-header title="All tests"></status-header>
     </ion-header>
     
     <ion-content class="tests-page">

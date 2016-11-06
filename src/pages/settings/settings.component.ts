@@ -10,45 +10,35 @@ import { Component } from "@angular/core";
 @Component({
   //templateUrl: 'settings.component.html'
   template: `
+    <ion-header>
+      <status-header title="Statuscake Settings"></status-header>
+    </ion-header>
 
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Statuscake Settings
-    </ion-title>
-    <ion-buttons>
-      <button ion-button menuToggle icon-only>
-        <ion-icon name='menu'></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
-<ion-content class="settings-page" padding>
-
-  <h2>Statuscake settings</h2>
-
-  <ion-list>
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" [(ngModel)]="scUsername"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>API Key</ion-label>
-      <ion-input type="text" [(ngModel)]="scApiKey"></ion-input>
-    </ion-item>
-    <a href="https://app.statuscake.com/APIKey.php" target="_blank">Get the api key here.</a>
+    <ion-content class="settings-page" padding>
     
-    <ion-item>
-      <ion-label floating>Tags (comma separated)</ion-label>
-      <ion-input type="text" [(ngModel)]="scTags"></ion-input>
-    </ion-item>
-    <ion-item>
-      <button ion-button (click)="saveSettings()">Save</button>
-    </ion-item>
-  </ion-list>
-</ion-content>
+      <h2>Statuscake settings</h2>
+    
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Username</ion-label>
+          <ion-input type="text" [(ngModel)]="scUsername"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-label floating>API Key</ion-label>
+          <ion-input type="text" [(ngModel)]="scApiKey"></ion-input>
+        </ion-item>
+        <a href="https://app.statuscake.com/APIKey.php" target="_blank">Get the api key here.</a>
+        
+        <ion-item>
+          <ion-label floating>Tags (comma separated)</ion-label>
+          <ion-input type="text" [(ngModel)]="scTags"></ion-input>
+        </ion-item>
+        <ion-item>
+          <button ion-button (click)="saveSettings()">Save</button>
+        </ion-item>
+      </ion-list>
+    </ion-content>
 
 `
 })

@@ -11,11 +11,7 @@ import { InAppBrowser } from "ionic-native";
   //templateUrl: 'detail.component.html'
   template: `
     <ion-header>
-      <ion-navbar>
-        <ion-title>
-          {{test.WebsiteName}}
-        </ion-title>
-      </ion-navbar>
+      <status-header title="{{test.WebsiteName}}"></status-header>
     </ion-header>
     
     <ion-content class="details-page" padding>

@@ -9,6 +9,7 @@ import { SortTestPipe } from "../pipes/sort-filter.pipe";
 import { ConfigService } from "../services/config.service";
 import { StatuscakeService } from "../services/statuscake.service";
 import { BulkActionComponent } from "../pages/bulk/bulk.component";
+import { StatusHeaderComponent } from "../components/status-header/status-header.component";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BulkActionComponent } from "../pages/bulk/bulk.component";
     TestsPanelComponent,
     DetailPanelComponent,
     BulkActionComponent,
+    StatusHeaderComponent,
     SortTestPipe
   ],
   imports: [
