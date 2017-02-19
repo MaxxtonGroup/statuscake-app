@@ -6,6 +6,8 @@
 
   <button ion-button (click)="openWebsite(test.URI)"><ion-icon name="link"></ion-icon> Open website</button>
 
+  <line-chart [statsData]="statsData"></line-chart>
+
   <ion-list>
         <span *ngFor="let field of testFields">
         <ion-item *ngIf="field != 'URI'">

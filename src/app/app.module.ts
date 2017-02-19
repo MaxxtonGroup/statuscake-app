@@ -10,6 +10,7 @@ import { ConfigService } from "../services/config.service";
 import { StatuscakeService } from "../services/statuscake.service";
 import { BulkActionComponent } from "../pages/bulk/bulk.component";
 import { StatusHeaderComponent } from "../components/status-header/status-header.component";
+import { LineChartComponent } from "../components/chart/linechart.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { StatusHeaderComponent } from "../components/status-header/status-header
     DetailPanelComponent,
     BulkActionComponent,
     StatusHeaderComponent,
-    SortTestPipe
+    SortTestPipe,
+    LineChartComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)

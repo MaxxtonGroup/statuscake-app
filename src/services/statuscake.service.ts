@@ -9,6 +9,7 @@ import 'rxjs/add/operator/share';
 import {Headers,RequestOptions} from "@angular/http";
 import {TestDetail} from "../domain/testdetail";
 import {ConfigService} from "./config.service";
+import { TestPerformanceStats } from "../domain/testperformancestats";
 
 
 /**
@@ -109,5 +110,20 @@ export class StatuscakeService {
     let requestOptions:RequestOptions = new RequestOptions({headers: this.headers});
     this.http.put(`${this.SC_API_URL}/Tests/Update`, `TestID=${test.TestID}&Paused=${paused}`, requestOptions)
       .subscribe((response) => { console.log(response.json()); });
+  }
+
+  public getPerformanceStats(testId:number):Observable<Array<TestPerformanceStats>> {
+    let params = new URLSearchParams();
+    params.set('TestID', testId.toString());
+    params.set('Fields', 'time,performance,status');
+
+    let requestOptions:RequestOptions = new RequestOptions({headers: this.headers, search: params});
+
+    let stats:Observable<Array<TestPerformanceStats>> = this.http.get(`${this.SC_API_URL}/Tests/Checks`, requestOptions)
+      .map((response:Response) => {
+        return response.json()
+      }).share();
+
+    return stats;
   }
 }
