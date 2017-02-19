@@ -7,31 +7,7 @@ import { BulkActionComponent } from "../pages/bulk/bulk.component";
 
 
 @Component({
-  // templateUrl: 'app.component.html'
-  template: `
-    <ion-menu [content]="content">
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Menu</ion-title>
-          <ion-buttons right>
-            <img width="50px" src="https://newyse-res.cloudinary.com/image/upload/maxxton2/logo.png" />
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-    
-      <ion-content>
-        <ion-list>
-          <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-            {{p.title}}
-          </button>
-        </ion-list>
-      </ion-content>
-    
-    </ion-menu>
-    
-    <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-    <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-  `
+  templateUrl: 'app.component.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

@@ -1,12 +1,5 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>All tests</ion-title>
-    <ion-buttons>
-      <button ion-button menuToggle icon-only>
-        <ion-icon name='menu'></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+  <status-header title="All tests"></status-header>
 </ion-header>
 
 <ion-content class="tests-page">
@@ -19,11 +12,11 @@
   </ion-segment>
 
   <ion-searchbar [(ngModel)]="filterQuery"></ion-searchbar>
-  <ion-list>
+  <ion-list [virtualScroll]="tests | async | sortTest:filterQuery:filterStatus">
     <ion-refresher #$event (ionRefresh)="refreshTests($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-item-sliding *ngFor="let test of tests | async | sortTest:filterQuery:filterStatus" [ngClass]="{ 'text-muted': test.Paused}" #slidingItem>
+    <ion-item-sliding *virtualItem="let test" [ngClass]="{ 'text-muted': test.Paused}" #slidingItem>
 
       <ion-item [ngClass]="{ 'text-muted': test.Paused}">
         <ion-thumbnail item-left>

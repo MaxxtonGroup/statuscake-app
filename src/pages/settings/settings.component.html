@@ -1,18 +1,5 @@
-
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Statuscake Settings
-    </ion-title>
-    <ion-buttons>
-      <button ion-button menuToggle icon-only>
-        <ion-icon name='menu'></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button (click)="saveSettings()">Done</button>
-    </ion-buttons>
-  </ion-navbar>
+  <status-header title="Statuscake Settings"></status-header>
 </ion-header>
 
 <ion-content class="settings-page" padding>
@@ -30,5 +17,13 @@
       <ion-input type="text" [(ngModel)]="scApiKey"></ion-input>
     </ion-item>
     <a href="https://app.statuscake.com/APIKey.php" target="_blank">Get the api key here.</a>
+
+    <ion-item>
+      <ion-label floating>Tags (comma separated)</ion-label>
+      <ion-input type="text" [(ngModel)]="scTags"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="saveSettings()">Save</button>
+    </ion-item>
   </ion-list>
 </ion-content>

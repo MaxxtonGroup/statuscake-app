@@ -1,14 +1,5 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      {{test.WebsiteName}}
-    </ion-title>
-    <ion-buttons>
-      <button ion-button menuToggle icon-only>
-        <ion-icon name='menu'></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+  <status-header title="{{test.WebsiteName}}"></status-header>
 </ion-header>
 
 <ion-content class="details-page" padding>
@@ -16,12 +7,12 @@
   <button ion-button (click)="openWebsite(test.URI)"><ion-icon name="link"></ion-icon> Open website</button>
 
   <ion-list>
-    <span *ngFor="let field of testFields">
-    <ion-item *ngIf="field != 'URI'">
-      <ion-label>{{field}}</ion-label>
-      <ion-note item-right>{{test[field]}}</ion-note>
-    </ion-item>
-    </span>
+        <span *ngFor="let field of testFields">
+        <ion-item *ngIf="field != 'URI'">
+          <ion-label>{{field}}</ion-label>
+          <ion-note item-right>{{test[field]}}</ion-note>
+        </ion-item>
+        </span>
   </ion-list>
 
 </ion-content>
