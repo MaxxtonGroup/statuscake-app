@@ -1,6 +1,11 @@
-import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { BrowserModule } from '@angular/platform-browser';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpModule } from "@angular/http";
+
 import { MyApp } from './app.component';
 import { SettingsPanelComponent } from "../pages/settings/settings.component";
 import { TestsPanelComponent } from "../pages/tests/tests.component";
@@ -15,7 +20,7 @@ import { LineChartComponent } from "../components/chart/linechart.component";
 @NgModule({
   declarations: [
     MyApp,
-    SettingsPanelComponent,
+    SettingsPanelComponent, 
     TestsPanelComponent,
     DetailPanelComponent,
     BulkActionComponent,
@@ -24,7 +29,10 @@ import { LineChartComponent } from "../components/chart/linechart.component";
     LineChartComponent
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    BrowserModule,
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,7 +45,9 @@ import { LineChartComponent } from "../components/chart/linechart.component";
   providers: [
     ConfigService,
     StatuscakeService,
-    Storage
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

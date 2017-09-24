@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { TestsPanelComponent } from "../pages/tests/tests.component";
 import { SettingsPanelComponent } from "../pages/settings/settings.component";
 import { BulkActionComponent } from "../pages/bulk/bulk.component";
@@ -16,7 +17,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -32,9 +33,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-      StatusBar.hide();
-      Splashscreen.hide();
+      this.statusBar.styleDefault();
+      this.statusBar.hide();
+      this.splashScreen.hide();
     });
   }
 

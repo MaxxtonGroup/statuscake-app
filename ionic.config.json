@@ -1,6 +1,8 @@
 {
   "name": "statuscake-app",
   "app_id": "9415d80a",
-  "typescript": true,
-  "v2": true
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }

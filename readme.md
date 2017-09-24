@@ -1,5 +1,5 @@
 # Introduction
-Simple Ionic2 app which shows Statuscake.com tests. Useful for easy lookup of possible uptime problems.
+Simple Ionic app which shows Statuscake.com tests. Useful for easy lookup of possible uptime problems.
 
 # Features
 * configure your account and favorite test tags
@@ -11,13 +11,12 @@ Simple Ionic2 app which shows Statuscake.com tests. Useful for easy lookup of po
 
 # Usage
 To run this app in the browser:
-* ionic serve
+* ionic serve --labs
 
 To run on iOS:
 * ionic build
-* ionic prepare ios
-* ionic run ios
+* ionic cordova prepare ios
+* ionic cordova run ios
 
 To run on Android:
 * ionic run android
-
