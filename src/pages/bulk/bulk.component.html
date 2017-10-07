@@ -5,25 +5,23 @@
 <ion-content class="bulk-action-page" padding>
 
   <ion-list>
-    <ion-item (click)="pauseAll()">
-      <ion-icon name='pause' item-left></ion-icon>
-      Pause all
-    </ion-item>
-
-    <ion-item (click)="resumeAll()">
-      <ion-icon name='play' item-left></ion-icon>
-      Resume all
-    </ion-item>
-
-    <ion-item (click)="presentActionSheet('pause')">
-      <ion-icon name='pricetag' item-left></ion-icon>
-      Pause per tag
-    </ion-item>
-
-    <ion-item (click)="presentActionSheet('resume')">
-      <ion-icon name='pricetag' item-left></ion-icon>
-      Resume per tag
-    </ion-item>
+    <ion-item-group>
+      <ion-item-divider color="light">All</ion-item-divider>
+      <button ion-item (click)="pauseAll()">
+        <ion-icon name='pause' item-left></ion-icon> Pause all
+      </button>
+      <button ion-item (click)="resumeAll()">
+        <ion-icon name='play' item-left></ion-icon> Resume all
+      </button>
+      
+      <ion-item-divider color="light">Per tag</ion-item-divider>
+      <button ion-item (click)="presentActionSheet('pause')">
+        <ion-icon name='pricetag' item-left></ion-icon> Pause per tag
+      </button>
+      <button ion-item (click)="presentActionSheet('resume')">
+        <ion-icon name='pricetag' item-left></ion-icon> Resume per tag
+      </button>
+    </ion-item-group>
   </ion-list>
 
 </ion-content>

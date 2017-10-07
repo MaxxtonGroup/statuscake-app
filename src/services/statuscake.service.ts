@@ -10,6 +10,7 @@ import {Headers,RequestOptions} from "@angular/http";
 import {TestDetail} from "../domain/testdetail";
 import {ConfigService} from "./config.service";
 import { TestPerformanceStats } from "../domain/testperformancestats";
+import { Platform } from 'ionic-angular';
 
 
 /**
@@ -19,10 +20,14 @@ import { TestPerformanceStats } from "../domain/testperformancestats";
 @Injectable()
 export class StatuscakeService {
 
-  private SC_API_URL:string = "https://app.statuscake.com/API";
+  private SC_API_URL:string = "/api";
   private headers:Headers;
 
-  constructor(private http:Http, private configService:ConfigService) {
+  constructor(private http:Http, private configService:ConfigService, private platform: Platform) {
+    if(platform.is('ios'))
+      this.SC_API_URL = "https://app.statuscake.com/API";
+
+    
     this.headers = new Headers();
     this.configService.getStatusCakeApiKey().then((key) => { this.headers.set('api', key); });
     this.configService.getStatusCakeUsername().then((user) => { this.headers.set('username', user); });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { StatuscakeService } from "../../services/statuscake.service";
-import { ActionSheetController } from "ionic-angular";
+import { ActionSheetController, ActionSheet } from "ionic-angular";
 import { ConfigService } from "../../services/config.service";
 
 /**
@@ -10,16 +10,9 @@ import { ConfigService } from "../../services/config.service";
 @Component({
   templateUrl: 'bulk.component.html'
 })
-export class BulkActionComponent implements OnInit {
+export class BulkActionComponent {
 
-  constructor(private statuscakeService:StatuscakeService, private actionSheetCtrl:ActionSheetController, private configService:ConfigService) {
-
-
-  }
-
-  ngOnInit():void {
-
-  }
+  constructor(private statuscakeService:StatuscakeService, private actionSheetCtrl:ActionSheetController, private configService:ConfigService) { }
 
   private resumeAll():void {
     this.statuscakeService.pauseTests(false);
@@ -29,9 +22,13 @@ export class BulkActionComponent implements OnInit {
     this.statuscakeService.pauseTests(true);
   }
 
-  private presentActionSheet(action:string):void {
+  private async presentActionSheet(action:string):Promise<void> {
     let buttons:Array<Object> = new Array<Object>();
-    this.configService.getStatusCakeTags().then((tags) => {
+    let actionSheet:ActionSheet;
+    
+    let tags:string = await this.configService.getStatusCakeTags();
+    
+    if(tags != null) {
       // tags is a comma separated string
       let tagArray = tags.split(',');
 
@@ -41,29 +38,26 @@ export class BulkActionComponent implements OnInit {
           {
             text: action.charAt(0).toUpperCase() + action.slice(1) + ' tag ' + tag,
             handler: () => {
-              console.log('Pressed tag: '+tag);
               this.doApiAction(action, tag);
             }
           }
         );
       }
+    }
+    
+    buttons.push(
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {}
+      }
+    );
 
-      buttons.push(
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            // do nothing
-          }
-        }
-      );
-
-      let actionSheet = this.actionSheetCtrl.create({
-        title: 'Which tag should be ' + action + 'd?',
-        buttons: buttons
-      });
-      actionSheet.present();
+    actionSheet = this.actionSheetCtrl.create({
+      title: 'Which tag should be ' + action + 'd?',
+      buttons: buttons
     });
+    actionSheet.present();
   }
 
   private doApiAction(action:string, tag:string) {

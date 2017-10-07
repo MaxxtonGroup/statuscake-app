@@ -12,11 +12,12 @@
   </ion-segment>
 
   <ion-searchbar [(ngModel)]="filterQuery"></ion-searchbar>
-  <ion-list [virtualScroll]="tests | async | sortTest:filterQuery:filterStatus">
+  <ion-list>
     <ion-refresher #$event (ionRefresh)="refreshTests($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-item-sliding *virtualItem="let test" [ngClass]="{ 'text-muted': test.Paused}" #slidingItem>
+    <ion-item-sliding *ngFor="let test of tests | async | sortTest:filterQuery:filterStatus" [ngClass]="{ 'text-muted': test.Paused}" #slidingItem>
+      
 
       <ion-item [ngClass]="{ 'text-muted': test.Paused}">
         <ion-thumbnail item-left>
@@ -28,6 +29,7 @@
         <p>Uptime: <ion-badge item-right>{{test.Uptime}}%</ion-badge></p>
 
         <button clear ion-button small item-right (click)="goToDetailPage(test.TestID)">Details</button>
+
       </ion-item>
       <ion-item-options>
         <button ion-button expandable (click)="togglePauseTest(test, slidingItem)">
@@ -35,7 +37,7 @@
           <ion-icon *ngIf="test.Paused" name="play"></ion-icon>
         </button>
       </ion-item-options>
-    </ion-item-sliding>
+    </ion-item-sliding>    
   </ion-list>
 
   <ion-card *ngIf="(tests | async | sortTest:filterQuery:filterStatus)?.length == 0">
